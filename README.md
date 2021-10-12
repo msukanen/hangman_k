@@ -1,4 +1,3 @@
-# hangman_k
-Hangman K[otlin]
+# Hangman K(otlin)
 
-A variation of "Hangman" w/Kotlin for Androids.
+A variation of "Hangman" word guessing game for Androids.
