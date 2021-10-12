@@ -28,13 +28,16 @@ class FirstFragment : Fragment() {
     private var gameOver: GameState = GameState.Running
     private val keys: MutableMap<Char, Button> = mutableMapOf()
 
+    private val gameOn: Boolean get() = gameOver == GameState.Running
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        val alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+        val alphabet = getString(R.string.alphabet)
         val buttons: List<Button> = listOf(
             binding.include.buttonA,
             binding.include.buttonB,
@@ -65,6 +68,7 @@ class FirstFragment : Fragment() {
         )
         var i = 0
         alphabet.forEach { ch ->
+            // lets bind a listener for each and every key in the "keyboard"...
             buttons[i].setOnClickListener { guess(ch) }
             keys[ch] = buttons[i]
             i += 1
@@ -73,13 +77,18 @@ class FirstFragment : Fragment() {
         binding.newGameButton.visibility = View.GONE
         binding.newGameButton.setOnClickListener {
             it.visibility = View.GONE
+
+            // reset the playing field
             gameOver = GameState.Running
             wrongGuesses = 0
             rightGuesses = 0
             wordToGuess = fetchRandomWord()
             rightGuessesRequired = wordToGuess.toCharArray().distinct().size
             guessedChs = ""
+
+            // (re-)enable all keys
             keys.forEach { k -> k.value.visibility = View.VISIBLE }
+
             updateHiddenWord()
         }
 
@@ -105,7 +114,7 @@ class FirstFragment : Fragment() {
         updateHiddenWord()
         disableKeys(selectively = true)
 
-        if (gameOver != GameState.Running) {
+        if (!gameOn) {
             disableKeys()
             binding.newGameButton.visibility = View.VISIBLE
         }
@@ -134,29 +143,41 @@ class FirstFragment : Fragment() {
         )
     }
 
+    /**
+     * Time to guess a letter...
+     */
     private fun guess(ch: Char) {
         keys[ch]?.visibility = View.INVISIBLE
         guessedChs = guessedChs.plus(ch)
+
         if (!wordToGuess.contains(ch, ignoreCase = true)) {
             wrongGuesses += 1
-            if (wrongGuesses == 10) {
+            if (wrongGuesses >= MAX_GUESSES) {
+                endGame(GameState.Loss)
                 gameOver = GameState.Loss
                 disableKeys()
                 binding.newGameButton.visibility = View.VISIBLE
             }
         } else rightGuesses += 1
 
-        if (rightGuesses >= rightGuessesRequired) {
-            gameOver = GameState.Victory
-            disableKeys()
-            binding.newGameButton.visibility = View.VISIBLE
-        }
+        if (gameOn && rightGuesses >= rightGuessesRequired)
+            endGame(GameState.Victory)
 
         updateHiddenWord()
     }
 
+    private fun endGame(state: GameState) {
+        gameOver = state
+        disableKeys()
+        binding.newGameButton.visibility = View.VISIBLE
+    }
+
+    /**
+     * Disable keys, either selectively or all of them.
+     */
     private fun disableKeys(selectively: Boolean = false) {
         if (selectively) {
+            // blank only those keys which have already been used
             guessedChs.forEach {
                 keys[it]?.visibility = View.INVISIBLE
             }
@@ -177,10 +198,16 @@ class FirstFragment : Fragment() {
      * Update hidden word based on current game state.
      */
     private fun updateHiddenWord() {
-        if (gameOver != GameState.Running)
-            binding.textviewHiddenWord.text = wordToGuess
-        else
-            binding.textviewHiddenWord.text = wordToGuess.map { if (it in guessedChs) it else '-' }.joinToString("")
+        with(binding.textviewHiddenWord) {
+            if (gameOver != GameState.Running)
+                this.text = wordToGuess
+            else this.text = wordToGuess.map { if (it in guessedChs) it else '-' }.joinToString("")
+        }
+
         changeHangedManState()
+    }
+
+    companion object {
+        const val MAX_GUESSES = 10
     }
 }

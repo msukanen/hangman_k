@@ -8,8 +8,8 @@
 
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label">Guess the Word!</string>
+    <string name="second_fragment_label">Score Board</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -22,6 +22,7 @@
     <string name="fab_new_game_desc">Start new game</string>
 
     <!-- Buttons -->
+    <string name="alphabet" translatable="false">abcdefghijklmnopqrstuvwxyz</string>
     <string name="button_a" translatable="false">A</string>
     <string name="button_b" translatable="false">B</string>
     <string name="button_c" translatable="false">C</string>
