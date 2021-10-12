@@ -137,7 +137,6 @@ class FirstFragment : Fragment() {
     private fun guess(ch: Char) {
         keys[ch]?.visibility = View.INVISIBLE
         guessedChs = guessedChs.plus(ch)
-        binding.textGuessedChs.text = guessedChs
         if (!wordToGuess.contains(ch, ignoreCase = true)) {
             wrongGuesses += 1
             if (wrongGuesses == 10) {
@@ -166,16 +165,22 @@ class FirstFragment : Fragment() {
         }
     }
 
+    /**
+     * Fetch a random word from internal "dictionary" of words.
+     */
     private fun fetchRandomWord(): String {
         val words = resources.getStringArray(R.array.words)
         return words[Random.nextInt(0, words.size)]
     }
 
+    /**
+     * Update hidden word based on current game state.
+     */
     private fun updateHiddenWord() {
         if (gameOver != GameState.Running)
             binding.textviewHiddenWord.text = wordToGuess
         else
-            binding.textviewHiddenWord.text = wordToGuess.map { if (it in guessedChs) it else '-' }.joinToString()
+            binding.textviewHiddenWord.text = wordToGuess.map { if (it in guessedChs) it else '-' }.joinToString("")
         changeHangedManState()
     }
 }
