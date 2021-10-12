@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">HangmanK</string>
+    <string name="app_name">Hangman K</string>
+    <string name="author" translatable="false">Markku Sukanen</string>
+    <string name="copyright" translatable="false">Copyright (C) 2021 Markku Sukanen</string>
+    <string name="author_email" translatable="false">markku.sukanen@gmail.com</string>
+    <string name="author_github" translatable="false">https://github.com/msukanen</string>
+    <string name="author_home" translatable="false">https://scifi.linkpc.net/msukanen</string>
+
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -9,4 +15,35 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="fab_desc">E-mail author</string>
+    <string name="img_hang_desc" translatable="false">Just hanging here</string>
+
+    <!-- Buttons -->
+    <string name="button_a" translatable="false">A</string>
+    <string name="button_b" translatable="false">B</string>
+    <string name="button_c" translatable="false">C</string>
+    <string name="button_d" translatable="false">D</string>
+    <string name="button_e" translatable="false">E</string>
+    <string name="button_f" translatable="false">F</string>
+    <string name="button_g" translatable="false">G</string>
+    <string name="button_h" translatable="false">H</string>
+    <string name="button_i" translatable="false">I</string>
+    <string name="button_j" translatable="false">J</string>
+    <string name="button_k" translatable="false">K</string>
+    <string name="button_l" translatable="false">L</string>
+    <string name="button_m" translatable="false">M</string>
+    <string name="button_n" translatable="false">N</string>
+    <string name="button_o" translatable="false">O</string>
+    <string name="button_p" translatable="false">P</string>
+    <string name="button_q" translatable="false">Q</string>
+    <string name="button_r" translatable="false">R</string>
+    <string name="button_s" translatable="false">S</string>
+    <string name="button_t" translatable="false">T</string>
+    <string name="button_u" translatable="false">U</string>
+    <string name="button_v" translatable="false">V</string>
+    <string name="button_w" translatable="false">W</string>
+    <string name="button_x" translatable="false">X</string>
+    <string name="button_y" translatable="false">Y</string>
+    <string name="button_z" translatable="false">Z</string>
 </resources>
