@@ -1,5 +1,7 @@
-# Hangman K(otlin)
+# Hangman K
 
-A variation of "Hangman" word guessing game.
+An Androidified and Kotlinized variant of (in)famous "Hangman" word guessing game.
 
-Mainly for Androids, for now. A React-based variant resides at https://github.com/msukanen/hangman_jr with live version at https://msukanen.github.io/hangman_jr
+# Variants and Ancestry
+
+* based on my [Hangman Jr](https://github.com/msukanen/hangman_jr) ([live](https://msukanen.github.io/hangman_jr)).
